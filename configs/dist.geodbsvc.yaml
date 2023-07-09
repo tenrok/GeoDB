@@ -1,0 +1,19 @@
+# Системная служба
+service:
+  name: 'geodbsvc' # Имя службы
+  display_name: 'GeoDB Service' # Отображаемое имя
+  description: 'GeoDB Service' # Описание
+
+# Веб-сервер
+server:
+  host: '' # Адрес
+  port: 8080 # Порт
+
+# Логи
+log:
+  enabled: false
+  file: './logs/geodbsvc.log'
+
+# База данных SQLite 3
+database:
+  dsn: 'file:GeoDB.sqlite'
