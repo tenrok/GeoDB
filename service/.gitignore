@@ -13,3 +13,4 @@
 /configs/*
 !/configs/dist.*
 *.exe
+geodbsvc

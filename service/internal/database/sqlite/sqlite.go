@@ -2,19 +2,28 @@ package sqlite
 
 import (
 	"database/sql"
+	"errors"
 	"net/url"
+
+	"geodbsvc/internal/utils"
 )
 
 type SqliteDB struct {
 	*sql.DB
 }
 
-// New подключается к существующей БД или создаёт новую
-func New(dsn string) (*SqliteDB, error) {
+// Open подключается к существующей БД
+func Open(dsn string) (*SqliteDB, error) {
 	u, err := url.Parse(dsn)
 	if err != nil {
 		return nil, err
 	}
+
+	fpath := u.Host + u.Path
+	if !utils.IsFileExists(fpath) {
+		return nil, errors.New("database doesn't exist")
+	}
+
 	queries := u.Query()
 	queries.Set("_fk", "1")
 	queries.Set("mode", "ro")

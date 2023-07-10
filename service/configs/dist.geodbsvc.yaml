@@ -7,7 +7,7 @@ service:
 # Веб-сервер
 server:
   host: '' # Адрес
-  port: 8080 # Порт
+  port: 3001 # Порт
 
 # Логи
 log:
@@ -16,4 +16,4 @@ log:
 
 # База данных SQLite 3
 database:
-  dsn: 'file:GeoDB.sqlite'
+  dsn: 'file://../GeoDB.sqlite'
