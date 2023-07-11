@@ -39,6 +39,10 @@ func New(cfg *viper.Viper, db database.DB, logger *loggerx.Logger) *Server {
 	router := gin.New()
 	router.Use(gin.Logger(), gin.Recovery())
 
+	// Заголовок X-Forwarded-For можно подделать и поэтому необходимо указывать, каким прокси-серверам ты доверяешь
+	router.SetTrustedProxies(srv.cfg.GetStringSlice("server.trusted_proxies"))
+	router.ForwardedByClientIP = srv.cfg.GetBool("server.forwarded_for")
+
 	// Некоторые настройки, связанные с безопасностью
 	router.Use(secure.Secure(secure.Options{
 		FrameDeny:          true, // Запрещает показывать сайт во фрейме
