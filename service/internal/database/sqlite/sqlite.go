@@ -4,6 +4,8 @@ import (
 	"database/sql"
 	"errors"
 	"net/url"
+	"path/filepath"
+	"strings"
 
 	"geodbsvc/internal/utils"
 )
@@ -14,25 +16,31 @@ type SqliteDB struct {
 
 // Open подключается к существующей БД
 func Open(dsn string) (*SqliteDB, error) {
-	u, err := url.Parse(dsn)
+	s := strings.TrimPrefix(dsn, "file://") // Удаляем схему
+	path, params, _ := strings.Cut(s, "?")  // Получаем путь до БД и параметры
+
+	// Проверяем: существует ли БД?
+	fullPath, err := filepath.Abs(path)
 	if err != nil {
 		return nil, err
 	}
-
-	fpath := u.Host + u.Path
-	if !utils.IsFileExists(fpath) {
+	if !utils.IsFileExists(fullPath) {
 		return nil, errors.New("database doesn't exist")
 	}
 
-	queries := u.Query()
-	queries.Set("_fk", "1")
-	queries.Set("mode", "ro")
-	u.RawQuery = queries.Encode()
-
-	db, err := sql.Open("sqlite3", u.String())
+	// Парсируем параметры и накидываем дополнительные
+	queries, err := url.ParseQuery(params)
 	if err != nil {
 		return nil, err
 	}
+	queries.Set("_fk", "1")
+
+	// Открываем БД
+	db, err := sql.Open("sqlite3", fullPath+"?"+queries.Encode())
+	if err != nil {
+		return nil, err
+	}
+
 	d := &SqliteDB{db}
 	return d, nil
 }
