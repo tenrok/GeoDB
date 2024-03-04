@@ -1,12 +1,14 @@
 # GeoDB
 
 [![Github licence](https://img.shields.io/github/license/tenrok/geodb)](https://raw.githubusercontent.com/tenrok/geodb/main/LICENSE)
+[![Example](https://img.shields.io/badge/example-blue)](https://github.com/tenrok/GeoDB/tree/example)
 
 База данных для определения геолокации по IPv4 в формате SQLite3
 
 [Скачать GeoDB.sqlite](https://github.com/tenrok/GeoDB/raw/main/GeoDB.sqlite)
 
 #### Пример запроса к БД
+
 ```sql
 with ip2long(ip, long) as (
   select '62.212.64.19', 0
@@ -38,7 +40,7 @@ select
   r.timezone "region_timezone"
 from networks n
   left join countries s on s.id = n.country_id
-  left join continents k on k.id = s.continent_id 
+  left join continents k on k.id = s.continent_id
   left join regions r on r.id = n.region_id
   left join cities g on g.id = n.city_id
 where
