@@ -1,7 +1,7 @@
 # GeoDB
 
 [![Github licence](https://img.shields.io/github/license/tenrok/geodb)](https://raw.githubusercontent.com/tenrok/geodb/main/LICENSE)
-[![Example](https://img.shields.io/badge/example-blue)](https://github.com/tenrok/GeoDB/tree/example)
+[![Example](https://img.shields.io/badge/example-blue)](https://github.com/tenrok/geodb-example)
 
 База данных для определения геолокации по IPv4 в формате SQLite3
 
