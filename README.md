@@ -3,9 +3,9 @@
 [![Github licence](https://img.shields.io/github/license/tenrok/geodb)](https://raw.githubusercontent.com/tenrok/geodb/main/LICENSE)
 [![Example](https://img.shields.io/badge/example-blue)](https://github.com/tenrok/geodb-example)
 
-База данных для определения геолокации по IPv4 в формате SQLite3
+База данных в формате SQLite3 для определения геолокации по IPv4
 
-[Скачать GeoDB.sqlite](https://github.com/tenrok/GeoDB/raw/main/GeoDB.sqlite)
+[Скачать GeoDB.sqlite](https://raw.githubusercontent.com/tenrok/GeoDB/main/GeoDB.sqlite)
 
 #### Пример запроса к БД
 
